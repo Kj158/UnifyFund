@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <section>
+  <div class="form-box" id="register">
+    <div class="form-value">
+      <form id="Mainform" class="w-25 m-4">
+        <h2>Register</h2>
+        <div class="inputbox mb-3" >
+          <ion-icon  class="icon" name="mail-outline"></ion-icon>
+          <input type="email" id="emailInp">
+          <label>Email</label>
+        </div>
+        <div class="inputbox mb-3">
+          <ion-icon class="icon" name="person-outline"></ion-icon>
+          <input type="text" id="Username" required>
+          <label>Username</label>
+        </div>
+        <div class="inputbox mb-3">
+          <ion-icon class="icon" name="lock-closed-outline"></ion-icon>
+          <input type="password" id="passwordInp" required>
+          <label>Password</label>
+        </div>
+        <!-- <div class="inputbox">
+          <ion-icon class="icon" name="lock-closed-outline"></ion-icon>
+          <input type="password" id="passwordInp" required>
+          <label>Confirm Password</label>
+        </div> -->
+        <style>
+          .inputbox input{position: relative;
+          left: -95%;
+        width: 100%;}
+        </style>
+     <button type="submit" class="btn">Register</button>
+        <div class="register">
+          <P>Already have an account? <a href="login.html" onclick="login()">Login</a> </P>
+        </div>
+      </form>
+    </div></section>
+    <script type="module">
+     
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+      import { getAuth,createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+      
+      const firebaseConfig = {
+        apiKey: "AIzaSyBnYkstP4DDEP284hk6-DtUZcF0mCgqX-s",
+        authDomain: "unify-fund-auth.firebaseapp.com",
+        projectId: "unify-fund-auth",
+        storageBucket: "unify-fund-auth.appspot.com",
+        messagingSenderId: "820691499618",
+        appId: "1:820691499618:web:ca9be8b5e9044ba5602f3b",
+        measurementId: "G-CMVFS16R2B"
+      };
+    
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase();
+      const auth = getAuth(app);
+      const analytics = getAnalytics(app);
+
+      let EmailInp = document.getElementById('emailInp');
+    let PasswordInp = document.getElementById('passwordInp');
+    let Username = document.getElementById('Username');
+    let Mainform = document.getElementById('Mainform');
+    let RegisterUser = evt => {
+      evt.preventDefault();
+      createUserWithEmailAndPassword(auth, EmailInp.value, PasswordInp.value)
+    .then((Credentials)=>{
+      console.log(error.Credentials);
+      set(ref(db, 'UsersAuthList/' + Credentials.user.uid),{
+        Username: Username.value
+      })
+
+    })  
+  .catch((error)=>{
+    alert(error.message);
+    console.log(error.code);
+    console.log(error.message);
+  })  }
+    
+  Mainform.addEventListener('submit',RegisterUser);
+    </script>
+</body>
+</html>

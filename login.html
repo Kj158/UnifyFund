@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login page</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  
+  <section>
+    <div class="form-box" id="login">
+      <div class="form-value">
+        <form action="">
+          <h2>Login</h2>
+          <div class="inputbox">
+            <ion-icon  class="icon" name="mail-outline"></ion-icon>
+            <input type="email" id="emailInp">
+            <label>Email</label>
+          </div>
+          <!-- <div class="inputbox">
+            <ion-icon class="icon" name="person-outline"></ion-icon>
+            <input type="text" required>
+            <label>Username</label>
+          </div> -->
+          <div class="inputbox">
+            <ion-icon class="icon" name="lock-closed-outline"></ion-icon>
+            <input type="password" id="passwordInp" required>
+            <label>Password</label>
+          </div>
+        
+          <div class="forget">
+    
+            <label><input type="checkbox" value="Remember Me" >Remember Me </label>
+            <a href="#">Forget Password</a>
+          </div>
+          <button type="submit" id="submit">Log in</button>
+          <div class="register">
+            <P>Don't have an account? <a href="register.html" onclick="register()">Register</a> </P>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+  
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script type="module">
+     
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+  import { getAuth,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyBnYkstP4DDEP284hk6-DtUZcF0mCgqX-s",
+    authDomain: "unify-fund-auth.firebaseapp.com",
+    projectId: "unify-fund-auth",
+    storageBucket: "unify-fund-auth.appspot.com",
+    messagingSenderId: "820691499618",
+    appId: "1:820691499618:web:ca9be8b5e9044ba5602f3b",
+    measurementId: "G-CMVFS16R2B"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase();
+  const auth = getAuth(app);
+  const dbref = ref(db);
+  const analytics = getAnalytics(app);
+
+  let EmailInp = document.getElementById('emailInp');
+let PasswordInp = document.getElementById('passwordInp');
+let Mainform = document.getElementById('Mainform');
+let Submit= document.getElementById('submit');
+let SignInUser = evt => {
+  evt.preventDefault();
+signInWithEmailAndPassword(auth, EmailInp.value, PasswordInp.value)
+.then((Credentials)=>{
+ get(child(dbref, 'UsersAuthList/' + Credentials.user.uid)).then((snapshot)=>{
+  if(snapshot.exists){
+    sessionStorage.setItem("user-info",JSON.stringify({
+      Username: snapshot.val().username}))
+  sessionStorage.setItem("user-creds",JSON.stringify(Credentials.uder));
+ window.location.href='UNIFY.html'
+  }
+ })
+ 
+
+})  
+.catch((error)=>{
+alert(error.message);
+console.log(error.code);
+console.log(error.message);
+})  }
+
+Submit.addEventListener('click', SignInUser);
+Submit.addEventListener('click', ()=>{
+  window.location.href='UNIFY.html';
+})
+</script>
+
+</body>
+</html>

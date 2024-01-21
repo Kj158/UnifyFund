@@ -1,0 +1,115 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.container{
+  min-height: 100vh;
+  backdrop-filter: blur(20px);
+  background-blend-mode: darken;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 90px ;
+  background-image: url(drop.jpg);
+}
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 100px;
+
+}
+.features{ text-align: center;
+  width:50%;
+  position: absolute;
+  top: 4%;
+  left: 30%;
+  font-size: 30px;
+  margin-bottom: 10px;
+  }
+   .signout{
+    font-size: 20px;
+    padding: 4px 6px ;
+    margin-left: 10px;
+    border: 3px solid grey;
+    border-radius: 10px;
+  } 
+  #search{
+    width: 80%;
+    height: 26px;
+    border: 2px solid grey;
+    border-radius: 12px;
+    padding: 12px 4px;
+    font-size: 16px;
+  }
+  #icon{
+    position: relative;
+    top: 12%;
+  }
+
+.top{
+  flex-direction: column;
+  justify-content: space-evenly
+}
+.middle{display: flex;
+  flex-direction: column;
+}
+.bottom{
+  flex-direction: column;
+  justify-content: start;
+}
+.content .card{
+  flex: 1;
+  margin: 20px 20px ;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,2);
+  padding-bottom: 4px;
+  justify-content: space-evenly ;
+  background-color: rgb(86, 94, 95);
+  height:auto;
+  transition: height 0.3s ease;
+  cursor: pointer;
+}
+.card:hover{
+  backdrop-filter:blur(50px);
+  transform: scale(1.1);
+
+}
+.expanded{
+  height:500px;
+}
+img 
+{height: 200px;
+}
+ 
+h2{
+  margin: 0px 0px;
+  font-size: 28px;
+  color: rgb(242, 239, 234);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.p{
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 0px 10px;
+  margin-bottom: 20px;
+  font-family: 'Times New Roman', Times, serif;
+
+}
+.tag{font-size: 20px;
+color: rgb(155, 147, 147);}
+.greentag{font-size: 20px;
+  color: rgb(104, 232, 97);}
+label{
+  font-size: 20px;
+}
+#file{height: 10px;
+  background-color: rgb(143, 78, 204);
+  margin-bottom: 4px;
+}
+@media screen and (max-width: 784px){
+  .content{flex-direction: column;}
+}
+

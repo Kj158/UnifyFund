@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore</title>
+  <link rel="stylesheet" href="explore.css">
+</head>
+<body>
+ 
+  <div class="container">
+    <div class="features vclass">
+      <ion-icon id="icon" name="search-outline"></ion-icon>
+      <input type="text" name="search" id="search" placeholder=" Search for a Fundraiser (e.g. Upcoming,ended, ...)" onkeyup="search()">
+    </div>
+    <div class="content" id="content">
+      <div class="top">
+      <div class="card" onclick="expandCard(this)">
+        <img src="coffee.jpg" alt="fund reference">
+        <h2>Midnight Coffee Roasting Cafe & Roastery Midtown</h2>
+        <p>Contribute to MCR's flagship cafe, roastery, and eatery as we grow our community into Midtown Reno.</p> <div class="greentag">Upcoming!</div>
+        <!-- <button onclick="readmore()" id="button">Read more</button>
+        <div id="dots">...</div> -->
+        <div class="more">
+          <h4>Organiser:James Miller</h4>
+        </div>
+      </div>
+      <div class="card">
+        <img src="tech.jpg" alt="fund reference">
+        <h2>Sears Technology</h2>
+        <p>
+          Empower Innovation, Transform Lives: Join Us in Fueling a Brighter Future Together!</p>
+          <div class="tag">ended!</div>
+      </div>
+      <div class="card">
+        <img src="uday.jpg" alt="fund reference">
+        <h2>Support Uday Journey to Recovery</h2>
+        <p>We reach out to you today with heavy hearts and a desperate plea for help for our beloved friend, Uday, who recently faced a life-altering event.He still on the ventilator and unable to move his right hand side.</p>
+        <label for="file"> Fund raised</label>
+        <progress id="file" value="40" max="100"> 40%</progress>
+      </div>
+      <div class="card" id="hunger">
+        <img src="hunger.jpg" alt="fund reference">
+        <h2>Gaza Paediatric Care Initiative </h2>
+          <p>Welcome to a team of medical professionals based in IRELAND. Our single goal is help all the children caught in the crossfire of the current conflict in Palestine.
+        </p><label for="file"> Fund raised</label>
+        <progress id="file" value="20" max="100"> 20%</progress></div>
+        
+      </div>
+   <div class="middle">
+      <div class="card">
+        <img src="animal.jpg" alt="fund reference">
+        <h2>
+          Help Save Hectors Life</h2>
+        <p>Hector is a 5 week old boxer puppy that has come into breeds in need rescue due to being born with no anus. He had an operation at 2.5 weeks old to make one for him but unfortunately the operation has failed and his anus has sealed up again</p>
+        <label for="file"> Fund raised</label>
+        <progress id="file" value="60" max="100">60%</progress>
+      </div>
+      <div class="card">
+        <img src="wild.jpg" alt="fund reference">
+        <h2>Wildlife Conservation</h2>
+        <p>Hi my name is Megan. I am 18 years old and live in East Sussex, England and I am passionate about animals.</p> <div class="greentag">Upcoming!</div>
+        <div class="more">
+          <h4>Organiser:Group of Angels</h4>
+        </div>
+      </div>
+      <div class="card">
+        <img src="women.jpg" alt="fund reference">
+        <h2>Chayn India's Research and Empowerment fund</h2>
+        <p>Help us create a freely usable database with all the women shelters and service providers in India.</p>
+        <label for="file"> Fund raised</label>
+        <progress id="file" value="98" max="100"> 98%</progress>
+      </div>
+      <div class="card">
+        <img src="research.jpg" alt="fund reference">
+        <h2>Unpaid intership to create fuel from cyanobacteria</h2>
+        <p>Research on a future source of green energy!
+
+          Vadim Sauthier</p> <div class="tag">ended!</div>
+    </div></div>
+      <div class="bottom">
+      <div class="card">
+        <img src="business.jpg" alt="fund reference">
+        <h2>Co-Lab: Crowdsourced Scientific Research</h2>
+        <p>Co-Lab crowdsources scientific research by sourcing observations, questions, and hypotheses.Think, for example, of cohousing, eco-villages, Community Land Trusts (CLTs), and a wide range of similar models.</p>
+        <label for="file"> Fund raised</label>
+        <progress id="file" value="33" max="100"> 33%</progress>
+      </div>
+      <div class="card">
+        <img src="green.jpg" alt="fund reference">
+        <h2>Save Eugene Weekly</h2>
+        <p>You can contribute directly to our efforts to return to print, posting stories online, writing our weekly email newsletters, and keeping this paper alive and back in your hands.
+        </p>
+        <label for="file"> Fund raised</label>
+        <progress id="file" value="47" max="100"> 47%</progress>
+      </div>
+      <div class="card">
+        <img src="together.jpg" alt="fund reference">
+        <h2>Trees treaty</h2>
+        <p>The Treaty of Big Tree was a formal treaty signed in 1797 between the Seneca Nation and the United States, in which the Seneca relinquished their rights to nearly all of their traditional homeland in New York State—nearly 3.5 million acres.
+        </p>
+        <label for="file"> Fund raised</label>
+        <progress id="file" value="70" max="100"> 70%</progress>
+      </div>
+      <div class="card">
+        <img src="fund.jpg" alt="fund reference">
+        <h2>Culture in the verge</h2>
+        <p>Culture provides proper. opportunities and prescribes means for the satisfaction of our needs and desires. You can contribute directly to our efforts to keeping this culture alive and back in your hands.
+        </p>
+        <label for="file"> Fund raised</label>
+<progress id="file" value="92" max="100"> 92%</progress>
+      </div>
+    </div></div>
+  </div>
+  <script src="./search.js"></script>
+  
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

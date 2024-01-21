@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unify Fund</title>
+  <link rel="stylesheet" href="unify.css">
+</head>
+<body>
+  <nav class="navbar background hnav">
+    <ul class="list vclass">
+      <div class="logo"> <img src="logo.jpg" alt="logo"></div>
+      <li> <a href="login.html" target="_blank"> Home</a> </li>
+      <li><a href="#About" onclick="showAlert()">About</a></li>
+      <li><a href="#contact"> Contact Us</a></li>
+      <li><a href="#contact"> Feedback</a></li> 
+      <li><button id="signout">Sign Out</button> </li>
+    </ul> 
+    <script>
+      function showAlert(){alert('Unify Fund is a trusted leader in online fundraising. With simple pricing and a team of Trust & Safety experts in your corner, you can raise money or make a donation with peace of mind.');}    </script>
+  <div class="features vclass">
+    <h1>Unify Fund</h1>
+    
+  </div>
+
+
+  <div class="burger">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  </nav>
+
+  <section class="background-first">
+    <div class="box-main">
+      <div class="firsthalf">
+        <p class="textbig">Together We Grow</p>
+        <p class="textsmall"> Welcome to UNIFY FUND where changemakers unite. Join our crowdfunding community focused on progress and making a difference in the world.</p>
+        <div class="buttons">
+          <button id="fund">Raise a fund</button>
+          <button id="explore">Explore</button>
+        </div>
+
+      </div>
+      
+    </div>
+  
+  <script>
+      var fund = document.getElementById('fund');
+      fund.addEventListener('click', function() {
+         
+          window.location.href = 'register.html';
+      });
+      var explore = document.getElementById('explore');
+      explore.addEventListener('click', function() {
+         
+          window.location.href = 'explore.html';
+      });
+  </script>
+
+<section id="content">
+  <section class="section">
+    <div class="paras">
+    <p class="sectiontag">Medical Research Fundraiser: "Fighting Disease, Saving Lives"
+    </p>
+    <p class="sectionsubtag"> Contribute to groundbreaking medical research that aims to find cures and improve treatments for diseases affecting millions globally.
+    </p> </div>
+    <div class="thumbnail">
+      <a href="explore.html"><img src="research.jpg" alt="fund reference" class="img"></a>
+    </div> 
+  </section>
+  <section class="section left">
+    <div class="paras">
+    <p class="sectiontag">Community Food Drive:
+     "Nourishing Our Neighbors"
+    </p>
+    <p class="sectionsubtag"> Description: Join us in the fight against hunger by supporting local food banks and community kitchens, ensuring that no one goes to bed hungry.
+    </p> </div>
+    <div class="thumbnail">
+      <a href="explore.html"><img src="hunger.jpg" alt="fund reference" class="img"></a>
+    </div> 
+  </section>
+  <section class="section">
+    <div class="paras">
+    <p class="sectiontag">Animal Welfare Initiative:"Paws for a Cause"
+    </p>
+    <p class="sectionsubtag"> Support animal shelters and rescue organizations dedicated to providing care, shelter, and medical assistance to animals in need.
+    </p> </div>
+    <div class="thumbnail">
+      <a href="explore.html"> <img src="animal.jpg" onclick="" alt="fund reference" class="img"> </a>
+    </div> 
+  </section>
+  <section class="section left">
+    <div class="paras">
+    <p class="sectiontag">Women's Empowerment Campaign:"Empowering Women, Creating Change"
+    </p>
+    <p class="sectionsubtag"> Description: Fund programs that promote gender equality, education, and economic opportunities for women, fostering empowerment and positive societal transformation.
+    </p> </div>
+    <div class="thumbnail">
+      <a href="explore.html"> <img src="women.jpg" alt="fund reference" class="img"> </a>
+    </div> 
+  </section> </section>
+  <hr>
+  <section class="Contactus" id="contact">
+    <h2>Contact Us</h2>
+    <div class="form">
+      <input type="text" name="name" id="name" placeholder="Enter your name"> <br>
+      <input type="phone" name="phone" id="phone" placeholder="Enter your phone"> <br>
+      <input type="email" name="email" id="email" placeholder="Enter your email"> <br> 
+      <textarea name="feedback" id="feedback" placeholder="please give your valueable feedback or raise your concern here" rows="6"></textarea> <br>
+      <button class="submit" onclick="
+          let name = document.getElementById('name');
+          let email = document.getElementById('email');
+          let phone = document.getElementById('phone');
+          let feedback = document.getElementById('feedback');
+          let submit = document.getElementById('submit');
+          if(name.value !== '' && email.value !== '' && phone.value !== '' && feedback.value !== ''){
+              name.value = '';
+              email.value = '';
+              phone.value = '';
+              feedback.value = '';
+              alert('Feedback submitted successfully');
+              
+          }
+          else{
+              alert('Error! Enter the data!');
+              name.value = '';
+              email.value = '';
+              phone.value = '';
+              feedback.value = '';
+          }
+      ">Submit</button>
+    </div>
+    
+
+  </section>
+  <!-- <script>
+   ''){
+        danger.style.display = 'block';
+    }
+    else{
+        setTimeout(() => {
+            name.value = '';
+            email.value = '';
+            phone.value = '';
+        }, 2000);
+
+        success.style.display = 'block';
+    }
+
+
+    setTimeout(() => {
+        danger.style.display = 'none';
+        success.style.display = 'none';
+    }, 4000);
+
+} -->
+<!-- // function Alert(){alert('Submission sent!');}   
+    // if (userInput===""){
+    //   window.alert("Please enter a value");
+    // } </script> -->
+  
+  <footer>
+    <p class="footer">
+    Copyright &copy;2024 Unify Fund - All rights reserved </p>
+  </footer>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+   <script type="module">
+    let Usercreds = JSON.parse(sessionStorage.getItem("user-creds"));
+    let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
+    let signout = document.getElementById('signout');
+    let Signout = () =>{
+    sessionStorage.removeItem("user-creds");
+    sessionStorage.removeItem("user-info");
+    window.location.href='login.html';
+  } ;
+  signout.addEventListener('click', Signout);
+
+   </script>
+</body> 
+</html>
