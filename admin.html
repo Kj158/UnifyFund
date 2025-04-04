@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a UnifyFund</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Start your own UnifyFund</h2>
+        
+        <div class="tab-menu">
+            <button class="tab-btn" onclick="showTab('details')">Fund Details</button>
+            <button class="tab-btn" onclick="showTab('bank')">Bank Information</button>
+            <button class="tab-btn" onclick="showTab('summary')">Summary</button>
+        </div>
+        
+        <form id="fundForm" novalidate>
+            <div id="details" class="tab-content">
+                <label>Country</label>
+                <select id="country" name="country" required>
+                    <option value="">Select Country</option>
+                    <option value="India">India</option>
+                    <option value="Canada">Canada</option>
+                    <option value="UK">UK</option>
+                    <option value="USA">USA</option>
+                   
+                </select>
+                
+                <label>Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="Animals">Animals</option>
+                    <option value="Charity">Charity</option>
+                    <option value="Education">Education</option>
+                    <option value="Medical">Medical</option>
+                
+                
+                </select>
+                
+                <label>Amount</label>
+                <div class="amount-container">
+                    <input type="number" id="amount" min="1000" name="amount" placeholder="Enter amount" required />
+                    <span class="unit-label">₹</span>
+                </div>
+                
+                <label>Cause</label>
+                <select id="cause" name="cause"required>
+                    <option value="">Select Cause</option>
+                    <option value="Myself">Myself</option>
+                    <option value="Someone else">Someone Else</option>
+                    <option value="Charity">Charity</option>
+                </select>
+            </div>
+            
+            <div id="bank" class="tab-content hidden">
+                <label>Bank Name</label>
+                <input type="text" name="bankName" id="bankName" required>
+                
+                <label>Account Number</label>
+                <input type="number" id="accountNumber" name="accountNumber" required>
+            </div>
+            
+            <div id="summary" class="tab-content hidden">
+                <h3>Review Your Details</h3>
+                <p id="summaryContent">Please review all the entered details before submitting your request.</p>
+                <button type="button" id="confirmSubmit">Confirm and Submit</button>
+            </div>
+           
+            <button type="submit">Submit Fund Request</button>
+        </form>
+    </div>
+    <script>
+        
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            document.getElementById(tabId).style.display = 'block';
+        }
+        
+
+        
+
+        document.addEventListener("DOMContentLoaded", function () {
+            showTab('details');
+            const form = document.getElementById("fundForm");
+            let formData = {};
+
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                if (!validateForm()) return;
+                ;
+
+                 
+                formData={
+                    
+                    compositeKey: crypto.randomUUID(),// Unique ID
+                country :document.getElementById("country").value,
+                 category :document.getElementById("category").value,
+                amount : document.getElementById("amount").value,
+                 cause : document.getElementById("cause").value,
+                bankName : document.getElementById("bankName").value,
+                 accountNumber : document.getElementById("accountNumber").value,};
+                
+               
+                const summaryContent = document.getElementById("summaryContent");
+                summaryContent.innerHTML = `
+                    <h3>Fund Summary</h3>
+                    <p><strong>Country:</strong> ${formData.country}</p>
+                    <p><strong>Category:</strong> ${formData.category}</p>
+                    <p><strong>Amount:</strong> ₹${formData.amount}</p>
+                    <p><strong>Cause:</strong> ${formData.cause}</p>
+                    <p><strong>Bank Name:</strong> ${formData.bankName}</p>
+                    <p><strong>Account Number:</strong> ${formData.accountNumber}</p>
+                `;
+                
+                
+                showTab('summary');
+            });
+
+            function validateForm() {
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('hidden'));
+                const visibleFields = document.querySelectorAll('.tab-content:not(.hidden) input, .tab-content:not(.hidden) select');
+    
+            for (let field of visibleFields) {
+        if (!field.value.trim()) {
+            alert(`Please fill in the ${field.name} field.`);
+            field.focus();
+            return false;
+        }
+    }
+         document.querySelectorAll('.tab-content:not(#summary)').forEach(tab => tab.classList.add('hidden'));
+        return true;
+    };
+
+
+   
+
+
+document.getElementById("confirmSubmit").addEventListener("click", async function () {
+    if (!validateForm()) return;
+
+    const apiUrl = "http://localhost:5000/submit-fund-request";
+
+    const requestBody = {
+        compositeKey: formData.compositeKey,
+        country: formData.country,
+        category: formData.category,
+        amount: parseInt(formData.amount, 10),
+        cause: formData.cause,
+        bankName: formData.bankName,
+        accountNumber: formData.accountNumber
+    };
+
+    console.log('Request Body being sent to the server:', requestBody);
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error("Failed to submit the request to the server.");
+        }
+
+        const responseData = await response.json();
+        alert("Request submitted successfully!");
+        console.log("Response from server:", responseData);
+
+      
+        window.location.href = "requests.html";
+    } catch (error) {
+        console.error("Error while submitting request:", error.message);
+        alert(`Submission failed: ${error.message}`);
+    }
+});
+
+
+
+
+
+});</script>
+<script type="module">
+
+
+</script>
+
+<script type="module" src="getToken.js"></script>
+
+
+    </script>
+
+  
+</body>
+</html>
