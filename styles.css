@@ -1,0 +1,153 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #2d6a4f, #1b4332);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: #fff;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  width: 420px;
+}
+
+h2 {
+  text-align: center;
+  color: #2d6a4f;
+  font-size: 22px;
+}
+
+.tab-menu {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover, .tab-btn:focus {
+  color: #2d6a4f;
+  border-bottom: 3px solid #2d6a4f;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content:first-child {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 12px;
+  color: #333;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.amount-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+  position: relative;
+}
+
+.amount-container input {
+  border: none;
+  flex: 1;
+  padding: 10px;
+  text-align: left;
+  padding-right: 50px;
+  font-size: 14px;
+}
+
+.unit-label {
+  position: absolute;
+  right: 12px;
+  font-weight: bold;
+  color: #2d6a4f;
+  font-size: 14px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  background: #2d6a4f;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+ 
+}
+
+button[type="submit"]:hover {
+  background: #1b4332;
+}
+#confirmSubmit{
+  width: 100%;
+  background: #2d6a4f;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  
+}
+#confirmSubmit:hover{
+  background: #153528;
+}
+
+#summary {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#summary h3 {
+  color: #2d6a4f;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#summary p {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
