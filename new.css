@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(120deg, #e0f7fa, #ffffff);
+  padding: 0;
+}
+
+.myImages {
+  height: 250px;
+  width: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.renderData {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  gap: 30px;
+  width: 100%;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+#search {
+  width: 60%;
+  height: 40px;
+  position: relative;
+  right:8%;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-right: 20px;
+}
+#search:not(:focus) {
+  caret-color: transparent;
+}
+
+.features {
+  position: relative;
+  top: 10px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.navigation-card {
+  margin-bottom: 20px;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 4px;
+  right: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  gap: 30px;
+  background-color:white;
+  padding: 15px 20px;
+  border-radius: 50px;
+}
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 10px;
+  overflow: hidden;
+  background-color: rgb(252, 252, 252);
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.tab:hover {
+  background-color: rgb(227, 223, 223);
+}
+
+.myreq{
+  
+  margin-left: 10px;
+  color: rgb(13, 11, 11);
+  padding: 8px 14px;
+}
+
+.nonprofit-card{
+  margin-top: 20px;
+  
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+}
+
+.nonprofit-card:hover {
+  transform: translateY(-5px);
+}
+
+.nonprofit-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  align-items: center;
+}
+
+
+.nonprofit-card h3 {
+  font-size: 18px;
+  margin: 10px 10px;
+  color: #333;
+}
+
+.nonprofit-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom:10px ;
+}
+
+.donatebtn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.donatebtn:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 768px) {
+  .renderData {
+    grid-template-columns: 1fr;
+  }
+}

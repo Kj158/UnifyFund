@@ -1,0 +1,255 @@
+<body>
+  <div class="header-container">
+  <h2>My Requests</h2>
+ 
+    <a href="UNIFY.html" onclick="goHome()"class="tab"id="homebtn" >
+      <svg
+        class="svgIcon"
+        viewBox="0 0 104 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M100.5 40.75V96.5H66V68.5V65H62.5H43H39.5V68.5V96.5H3.5V40.75L52 4.375L100.5 40.75Z"
+          stroke="black"
+          stroke-width="7"
+        ></path>
+      </svg>
+    </a>
+  </div>
+  <div id="requestsContainer" class="requests-container"></div>
+
+  <script>
+    
+      document.addEventListener("DOMContentLoaded", function () {
+        loadRequests();
+
+      });
+      function loadRequests() {
+    const requestsContainer = document.getElementById("requestsContainer");
+
+    requestsContainer.innerHTML = "<p>Loading requests...</p>"; 
+
+   
+    fetch("http://localhost:5000/fetch-fund-requests")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch fund requests.");
+            }
+            return response.json();
+        })
+        .then(data => {
+          console.log("API Response:", data);
+
+            const fundRequests = data.fundRequests || [];
+            requestsContainer.innerHTML = ""; 
+            if (fundRequests.length === 0) {
+                requestsContainer.innerHTML = "<p class='empty-message'>No requests found.</p>";
+                return;
+            }
+
+            fundRequests.forEach(request => {
+              
+        
+    
+                const requestCard = document.createElement("div");
+                requestCard.classList.add("request-card");
+                requestCard.innerHTML = `
+                    <h3>${request.category}</h3>
+                    <p><strong>Country:</strong> ${request.country}</p>
+                    <p><strong>Amount:</strong> ₹${request.amount}</p>
+                    <p><strong>Cause:</strong> ${request.cause}</p>
+                    
+                   <button onclick="deleteRequest('${request.compositeKey}', this)">Delete</button>
+
+
+                `;
+                
+                requestsContainer.appendChild(requestCard);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading fund requests:", error.message);
+            requestsContainer.innerHTML = "<p class='error-message'>Failed to load requests. Please try again later.</p>";
+        });
+        
+
+}
+
+
+
+
+function deleteRequest(compositeKey, button) { 
+
+  if (!compositeKey || compositeKey === "undefined") {
+    console.error("Invalid composite key:", compositeKey);
+        alert("Failed to delete request. Invalid request ID.");
+        return;
+    }
+    fetch(`http://localhost:5000/delete-fund-request/${compositeKey}`, { method: 'DELETE' })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to delete fund request.");
+            }
+            return response.json();
+        })
+        .then(() => {
+            button.parentElement.remove(); 
+        })
+        .catch(error => {
+            console.error("Error deleting fund request:", error.message);
+            alert("Failed to delete request. Please try again.");
+        });
+}
+
+
+
+      function goHome() {
+            window.location.href = "UNIFY.html";
+        }
+
+  </script>
+
+  <style>
+    input {
+    caret-color: rgba(0, 0, 0, 0);
+}
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(120deg, #2d6a4f, #ffffff);
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+        }
+
+        h2 {
+          font-size: 22px;
+      font-weight: bold;
+      color: #333;
+      caret-color: transparent;
+
+        }
+      .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      position: relative;
+      caret-color: transparent;
+      
+    }
+
+        
+
+      .tab {
+        position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: rgb(252, 252, 252);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;}
+
+        .tab:hover {
+          background-color: rgb(227, 223, 223);
+        }
+        
+        #requestsContainer {
+          display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      max-width: 800px;
+      margin: auto;
+        }
+
+        .empty-message {
+            color: #888;
+            font-style: italic;
+            font-size: 18px;
+        }
+      .request-card {
+        background: white;
+      border-radius: 10px;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+      padding: 15px;
+      width: 300px;
+      text-align: left;
+      transition: transform 0.2s ease-in-out;
+     
+      }
+      .request-card h3 {
+        font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+      caret-color: transparent;
+     
+    }
+    .request-card p {
+      font-size: 14px;
+      color: #555;
+       caret-color: transparent;
+      margin-bottom: 5px;
+    }
+      
+
+      .request-card:hover {
+            transform: scale(1.02);
+        }
+      .request-card button {
+          background-color: rgb(231, 18, 18);
+          border-radius: 4px;
+          color: white;
+          padding: 5px 10px;
+          border: none;
+          cursor: pointer;
+          margin-top: 10px;
+      }
+      .delete-btn {
+        background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: 0.3s;
+      display: block;
+      margin-top: 10px;
+      text-align: center;
+        }
+
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+  </style>
+</body>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js';
+  import { getAuth } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBnYkstP4DDEP284hk6-DtUZcF0mCgqX-s",
+    authDomain: "unify-fund-auth.firebaseapp.com",
+    projectId: "unify-fund-auth",
+  };
+
+ 
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  console.log("Firebase Initialized!");
+</script>
+<!-- <script type="module" src="getToken.js"></script> -->
+<!-- <script type="module" src="req.js"></script> -->
+<!-- <script type="module" src="req.js"></script>
+<script type="module" src="getToken.js"></script> -->
+
+
+
