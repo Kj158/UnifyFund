@@ -11,10 +11,10 @@
   <div class="form-box" id="register">
     <div class="form-value">
       <form id="Mainform" class="w-25 m-4">
-        <h2>Register</h2>
+        <h2 id="reg">Register</h2>
         <div class="inputbox mb-3" >
           <ion-icon  class="icon" name="mail-outline"></ion-icon>
-          <input type="email" id="emailInp">
+          <input type="email" id="emailInp" required>
           <label>Email</label>
         </div>
         <div class="inputbox mb-3">
@@ -27,11 +27,7 @@
           <input type="password" id="passwordInp" required>
           <label>Password</label>
         </div>
-        <!-- <div class="inputbox">
-          <ion-icon class="icon" name="lock-closed-outline"></ion-icon>
-          <input type="password" id="passwordInp" required>
-          <label>Confirm Password</label>
-        </div> -->
+        
         <style>
           .inputbox input{position: relative;
           left: -95%;
@@ -65,25 +61,36 @@
       const auth = getAuth(app);
       const analytics = getAnalytics(app);
 
-      let EmailInp = document.getElementById('emailInp');
+    let EmailInp = document.getElementById('emailInp');
     let PasswordInp = document.getElementById('passwordInp');
     let Username = document.getElementById('Username');
     let Mainform = document.getElementById('Mainform');
-    let RegisterUser = evt => {
-      evt.preventDefault();
-      createUserWithEmailAndPassword(auth, EmailInp.value, PasswordInp.value)
-    .then((Credentials)=>{
-      console.log(error.Credentials);
-      set(ref(db, 'UsersAuthList/' + Credentials.user.uid),{
-        Username: Username.value
-      })
+    let Registerbutton=document.querySelector(".btn");
 
-    })  
-  .catch((error)=>{
-    alert(error.message);
-    console.log(error.code);
-    console.log(error.message);
-  })  }
+    const RegisterUser = async(evt) => {
+      evt.preventDefault();
+      Registerbutton.disabled=true;
+
+      try{
+      const Credentials= await createUserWithEmailAndPassword(auth, EmailInp.value, PasswordInp.value);
+    
+        const user=Credentials.user;
+      console.log("User registered:",user);
+
+      await set(ref(db, 'UsersAuthList/' + user.uid),{
+        Username: Username.value
+      });
+      alert("Registration successful!");
+      window.location.href="login.html";}
+    
+      catch(error) {
+    console.error("Error:",error.code,error.message);
+
+    alert(`Error:${error.message}`);
+    // console.log(error.code);
+    // console.log(error.message);
+  }  Registerbutton.disabled=false;
+  };
     
   Mainform.addEventListener('submit',RegisterUser);
     </script>
