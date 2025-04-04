@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login page</title>
+  <title>Login Page</title>
   <link rel="stylesheet" href="login.css">
 </head>
 <body>
@@ -11,94 +11,100 @@
   <section>
     <div class="form-box" id="login">
       <div class="form-value">
-        <form action="">
-          <h2>Login</h2>
+        <form id="Mainform">
+          <h2 id="log">Login</h2>
           <div class="inputbox">
-            <ion-icon  class="icon" name="mail-outline"></ion-icon>
-            <input type="email" id="emailInp">
+            <ion-icon class="icon" id="mail"name="mail-outline"></ion-icon>
+            <input type="email" id="emailInp" required>
             <label>Email</label>
           </div>
-          <!-- <div class="inputbox">
-            <ion-icon class="icon" name="person-outline"></ion-icon>
-            <input type="text" required>
-            <label>Username</label>
-          </div> -->
+
           <div class="inputbox">
-            <ion-icon class="icon" name="lock-closed-outline"></ion-icon>
+            <ion-icon class="icon" id="pas"name="lock-closed-outline"></ion-icon>
             <input type="password" id="passwordInp" required>
             <label>Password</label>
           </div>
         
-          <div class="forget">
-    
-            <label><input type="checkbox" value="Remember Me" >Remember Me </label>
-            <a href="#">Forget Password</a>
-          </div>
+       
+
           <button type="submit" id="submit">Log in</button>
-          <div class="register">
-            <P>Don't have an account? <a href="register.html" onclick="register()">Register</a> </P>
+
+          <div class="loginreg">
+            <p>Don't have an account? <a href="register.html">Register</a></p>
           </div>
         </form>
       </div>
-
     </div>
   </section>
+
   
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script type="module">
-     
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import {getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-  import { getAuth,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+   
+    const firebaseConfig = {
+      apiKey: "AIzaSyBnYkstP4DDEP284hk6-DtUZcF0mCgqX-s",
+      authDomain: "unify-fund-auth.firebaseapp.com",
+      projectId: "unify-fund-auth",
+      storageBucket: "unify-fund-auth.appspot.com",
+      messagingSenderId: "820691499618",
+      appId: "1:820691499618:web:ca9be8b5e9044ba5602f3b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+    const dbref = ref(db);
+
+   
+    const EmailInp = document.getElementById('emailInp');
+    const PasswordInp = document.getElementById('passwordInp');
+    const Mainform = document.getElementById('Mainform');
+    const Submit = document.getElementById('submit');
+
   
-  const firebaseConfig = {
-    apiKey: "AIzaSyBnYkstP4DDEP284hk6-DtUZcF0mCgqX-s",
-    authDomain: "unify-fund-auth.firebaseapp.com",
-    projectId: "unify-fund-auth",
-    storageBucket: "unify-fund-auth.appspot.com",
-    messagingSenderId: "820691499618",
-    appId: "1:820691499618:web:ca9be8b5e9044ba5602f3b",
-    measurementId: "G-CMVFS16R2B"
-  };
+    const SignInUser = async (evt) => {
+      evt.preventDefault();
+      Submit.disabled = true; 
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase();
-  const auth = getAuth(app);
-  const dbref = ref(db);
-  const analytics = getAnalytics(app);
+      try {
+        const Credentials = await signInWithEmailAndPassword(auth, EmailInp.value, PasswordInp.value);
+        const user = Credentials.user;
+        console.log("User logged in:", user);
 
-  let EmailInp = document.getElementById('emailInp');
-let PasswordInp = document.getElementById('passwordInp');
-let Mainform = document.getElementById('Mainform');
-let Submit= document.getElementById('submit');
-let SignInUser = evt => {
-  evt.preventDefault();
-signInWithEmailAndPassword(auth, EmailInp.value, PasswordInp.value)
-.then((Credentials)=>{
- get(child(dbref, 'UsersAuthList/' + Credentials.user.uid)).then((snapshot)=>{
-  if(snapshot.exists){
-    sessionStorage.setItem("user-info",JSON.stringify({
-      Username: snapshot.val().username}))
-  sessionStorage.setItem("user-creds",JSON.stringify(Credentials.uder));
- window.location.href='UNIFY.html'
-  }
- })
- 
+        const idToken = await user.getIdToken();  
+      console.log("User Token:", idToken);
 
-})  
-.catch((error)=>{
-alert(error.message);
-console.log(error.code);
-console.log(error.message);
-})  }
+        
+        const snapshot = await get(child(dbref, 'UsersAuthList/' + user.uid));
+        if (snapshot.exists()) {
+          sessionStorage.setItem("user-info", JSON.stringify({
+            Username: snapshot.val().Username, 
+            Email: snapshot.val().Email
+          }));
+          sessionStorage.setItem("user-creds", JSON.stringify(user));
+          sessionStorage.setItem("auth-token", idToken); 
 
-Submit.addEventListener('click', SignInUser);
-Submit.addEventListener('click', ()=>{
-  window.location.href='UNIFY.html';
-})
-</script>
+          
+          window.location.href = "UNIFY.html"; 
+        } else {
+          alert("User data not found.");
+        }
+      } catch (error) {
+        console.error("Error:", error.code, error.message);
+        alert(`Error: ${error.message}`);
+      }
 
+      Submit.disabled = false;
+    };
+
+    
+    Mainform.addEventListener('submit', SignInUser);
+  </script>
 </body>
 </html>
