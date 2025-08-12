@@ -146,7 +146,7 @@
 document.getElementById("confirmSubmit").addEventListener("click", async function () {
     if (!validateForm()) return;
 
-    const apiUrl = "http://localhost:5000/submit-fund-request";
+const apiUrl = "/submit-fund-request";
 
     const requestBody = {
         compositeKey: formData.compositeKey,
@@ -203,4 +203,5 @@ document.getElementById("confirmSubmit").addEventListener("click", async functio
 
   
 </body>
+
 </html>
