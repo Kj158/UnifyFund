@@ -30,7 +30,7 @@
     requestsContainer.innerHTML = "<p>Loading requests...</p>"; 
 
    
-    fetch("http://localhost:5000/fetch-fund-requests")
+      fetch("/fetch-fund-requests")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to fetch fund requests.");
@@ -85,7 +85,7 @@ function deleteRequest(compositeKey, button) {
         alert("Failed to delete request. Invalid request ID.");
         return;
     }
-    fetch(`http://localhost:5000/delete-fund-request/${compositeKey}`, { method: 'DELETE' })
+    fetch(`/delete-fund-request/${compositeKey}`, { method: 'DELETE' })
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to delete fund request.");
@@ -250,6 +250,7 @@ function deleteRequest(compositeKey, button) {
 <!-- <script type="module" src="req.js"></script> -->
 <!-- <script type="module" src="req.js"></script>
 <script type="module" src="getToken.js"></script> -->
+
 
 
 
