@@ -29,12 +29,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'requests.html'));
 });
 
-
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-});
-
-
 app.use(express.json());
 app.use(cors());
 
@@ -128,6 +122,7 @@ app.delete('/delete-fund-request/:compositeKey', async (req, res) => {
       res.status(500).json({ message: "Failed to delete request." });
   }
 });
+
 
 
 
