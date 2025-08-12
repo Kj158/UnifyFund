@@ -16,7 +16,11 @@ const __dirname = path.dirname(__filename);
 
 
 const app = express();
-const port =  5000; 
+const port =process.env.PORT || 5000;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
+
 
 
 app.use(express.static(path.join(__dirname)));
@@ -124,6 +128,7 @@ app.delete('/delete-fund-request/:compositeKey', async (req, res) => {
       res.status(500).json({ message: "Failed to delete request." });
   }
 });
+
 
 
 
