@@ -34,10 +34,13 @@ app.use(cors());
 
 
 
+const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
+
 const datastore = new Datastore({
-    projectId: 'unify-fund-auth',
-    keyFilename: 'C:\\Users\\kashi\\Downloads\\unify-fund-auth-48a5867073c3.json'  
+  projectId: credentials.project_id,
+  credentials
 });
+
 
 import crypto from 'crypto';
 
@@ -122,6 +125,7 @@ app.delete('/delete-fund-request/:compositeKey', async (req, res) => {
       res.status(500).json({ message: "Failed to delete request." });
   }
 });
+
 
 
 
